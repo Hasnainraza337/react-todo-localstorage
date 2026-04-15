@@ -12,24 +12,28 @@ const Hero = () => {
 
     const [formData, setFormData] = useState(initialValues);
 
+    const handleChange = e => setFormData((s) => ({ ...s, [e.target.name]: e.target.value }))
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
 
-        setFormData((s) => ({ ...s, [name]: value }));
-    };
+    //     setFormData((s) => ({ ...s, [name]: value }));
+    // };
 
 
 
     const handleSubmit = () => {
-        if (!formData.title || !formData.location) return message.error("Title and Location are required!");
+
+        const { title, location, description } = formData;
+
+        if (!title || !location) return message.error("Title and Location are required!");
 
         const todos = JSON.parse(localStorage.getItem('todos')) || [];
 
         const todo = {
-            title: formData.title,
-            location: formData.location,
-            description: formData.description,
+            title,
+            location,
+            description,
         };
 
         todo.id = Math.random().toString(36).slice(2),

@@ -11,6 +11,7 @@ const Hero = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editTodo, setEditTodo] = useState(null);
     const [form] = Form.useForm();
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
 
     // get todos
@@ -20,7 +21,13 @@ const Hero = () => {
     };
 
     useEffect(() => {
-        getTodos();
+        const user = localStorage.getItem("user")
+        if (user) {
+            setIsLoggedIn(true)
+            getTodos();
+        } else {
+            setIsLoggedIn(false)
+        }
     }, []);
 
 
